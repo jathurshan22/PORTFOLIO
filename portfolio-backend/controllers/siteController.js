@@ -100,7 +100,7 @@ async function uploadCv(req, res, next) {
 
         const doc = await getOrCreateSiteContent();
         const previousCv = doc.settings.cvUrl;
-        const url = `/uploads/${req.file.filename}`;
+        const url = req.file.path;
 
         doc.settings.cvUrl = url;
         await doc.save();

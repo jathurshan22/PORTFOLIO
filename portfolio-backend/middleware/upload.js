@@ -1,33 +1,19 @@
 "use strict";
 
 const multer = require("multer");
-const path = require("path");
-const crypto = require("crypto");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, "..", "uploads"));
-    },
-    filename: (req, file, cb) => {
-        const unique = crypto.randomBytes(8).toString("hex");
-        const ext = path.extname(file.originalname).toLowerCase();
-        cb(null, `${Date.now()}-${unique}${ext}`);
+const storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: "portfolio/images",
+        allowed_formats: ["jpg", "jpeg", "png", "webp", "gif"]
     }
 });
 
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-
-function fileFilter(req, file, cb) {
-    if (ALLOWED_TYPES.includes(file.mimetype)) {
-        cb(null, true);
-    } else {
-        cb(new Error("Only image files are allowed (jpeg, png, webp, gif)"));
-    }
-}
-
 const upload = multer({
     storage,
-    fileFilter,
     limits: { fileSize: 5 * 1024 * 1024 } // 5MB
 });
 

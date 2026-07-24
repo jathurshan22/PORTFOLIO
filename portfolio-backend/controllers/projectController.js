@@ -76,7 +76,7 @@ async function uploadImage(req, res) {
 
     res.status(201).json({
         success: true,
-        url: `/uploads/${req.file.filename}`
+        url: req.file.path
     });
 }
 
