@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Login — Jathurshan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="login-body">
+
+    <main class="login-card">
+        <p class="login-eyebrow">ADMIN PANEL</p>
+        <h1 class="login-title">JATHURSHAN</h1>
+        <p class="login-subtitle">Sign in to manage your portfolio</p>
+
+        <form id="loginForm" novalidate>
+            <div class="admin-field">
+                <label for="loginEmail">EMAIL</label>
+                <input
+                    id="loginEmail"
+                    name="email"
+                    type="email"
+                    autocomplete="username"
+                    placeholder=""
+                    required
+                >
+            </div>
+
+            <div class="admin-field">
+                <label for="loginPassword">PASSWORD</label>
+                <input
+                    id="loginPassword"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder=""
+                    required
+                >
+            </div>
+
+            <button class="admin-button admin-button-gold login-submit" type="submit">
+                <span>SIGN IN</span>
+            </button>
+
+            <p class="login-status" id="loginStatus" aria-live="polite"></p>
+        </form>
+
+        <a class="login-back" href="/">← Back to site</a>
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

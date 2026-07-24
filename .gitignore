@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Uploaded content (regenerated at runtime)
+portfolio-backend/uploads/*
+!portfolio-backend/uploads/.gitkeep
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build / logs
+.dist/
+dist/
+*.log
+npm-debug.log*
