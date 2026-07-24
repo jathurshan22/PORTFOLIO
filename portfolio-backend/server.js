@@ -10,6 +10,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
 
 const connectDB = require("./config/db");
+const seedAdmin = require("./utils/seedAdmin");
 const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const projectRoutes = require("./routes/projectRoutes");
@@ -17,8 +18,7 @@ const siteRoutes = require("./routes/siteRoutes");
 const { notFound, errorHandler } = require("./middleware/errorHandler");
 
 const app = express();
-
-connectDB();
+connectDB().then(seedAdmin);
 
 // Behind a hosting proxy (Render / Railway / Nginx) so express-rate-limit
 // sees the real client IP instead of the proxy IP.
