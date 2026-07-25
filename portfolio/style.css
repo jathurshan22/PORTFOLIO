@@ -1949,7 +1949,7 @@ button {
 
 .about-section {
     position: relative;
-    height: 240vh;
+    height: 280vh;
     background:
         radial-gradient(circle at 14% 35%, rgba(212, 175, 55, 0.045), transparent 30%),
         radial-gradient(circle at 82% 45%, rgba(25, 120, 165, 0.07), transparent 34%),
@@ -2382,7 +2382,7 @@ button {
 }
 
 @media (max-width: 1100px) {
-    .about-section { height: 250vh; }
+    .about-section { height: 280vh; }
 
     .about-sticky {
         min-height: 740px;

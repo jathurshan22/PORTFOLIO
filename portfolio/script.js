@@ -90,7 +90,9 @@ function renderAboutTyping(progress) {
     }
 
     // Small intro pause, then map scroll progress directly to character count.
-    const typingProgress = smoothStep(0.035, 0.90, progress);
+    // Typing finishes at 82% of the scroll runway, leaving a pinned buffer
+    // afterwards so the section never moves on before typing completes.
+    const typingProgress = smoothStep(0.05, 0.82, progress);
     const characterCount = Math.floor(ABOUT_TEXT.length * typingProgress);
 
     if (characterCount !== lastCharacterCount) {
@@ -118,7 +120,7 @@ function renderAboutTyping(progress) {
 
 function animationLoop() {
     currentAboutProgress +=
-        (targetAboutProgress - currentAboutProgress) * 0.12;
+        (targetAboutProgress - currentAboutProgress) * 0.18;
 
     if (Math.abs(targetAboutProgress - currentAboutProgress) < 0.0001) {
         currentAboutProgress = targetAboutProgress;
