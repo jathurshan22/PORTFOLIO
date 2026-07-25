@@ -3360,6 +3360,17 @@ button {
     line-height: 1.15;
 }
 
+/* Keep unicode arrow glyphs as text (not emoji) across all devices */
+.skills-tab-arrow,
+.contact-detail-arrow,
+.contact-submit-arrow,
+.project-nav-btn,
+.back-to-top span,
+.contact-social-link span,
+.primary-button span {
+    font-variant-emoji: text;
+}
+
 .skills-tab-arrow {
     width: 34px;
     height: 34px;
