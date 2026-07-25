@@ -29,9 +29,7 @@
 html {
     scroll-behavior: smooth;
 
-    /* Stop horizontal swipe on mobile (body-only overflow-x isn't
-       enough on iOS). clip doesn't break .about-sticky like hidden would. */
-    overflow-x: clip;
+    
 }
 
 
