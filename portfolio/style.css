@@ -28,18 +28,15 @@
 
 html {
     scroll-behavior: smooth;
-
-    /* Stop horizontal swipe on mobile (body-only overflow-x isn't
-       enough on iOS). clip doesn't break .about-sticky like hidden would. */
-    overflow-x: clip;
 }
 
 
 body {
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
 
-    overflow-x: hidden;
+    overflow-x: clip;
 
     background: #000;
 
@@ -1949,7 +1946,7 @@ button {
 
 .about-section {
     position: relative;
-    height: 280vh;
+    height: 240vh;
     background:
         radial-gradient(circle at 14% 35%, rgba(212, 175, 55, 0.045), transparent 30%),
         radial-gradient(circle at 82% 45%, rgba(25, 120, 165, 0.07), transparent 34%),
@@ -2382,7 +2379,7 @@ button {
 }
 
 @media (max-width: 1100px) {
-    .about-section { height: 280vh; }
+    .about-section { height: 250vh; }
 
     .about-sticky {
         min-height: 740px;
@@ -2970,8 +2967,7 @@ button {
         grid-auto-columns: 88%;
         gap: 14px;
 
-        /* Enable finger swipe on mobile (base rule hides overflow
-           + locks touch to vertical, so only arrows worked before) */
+        /* Enable finger swipe on mobile */
         overflow-x: auto;
         touch-action: pan-x pan-y;
         -webkit-overflow-scrolling: touch;

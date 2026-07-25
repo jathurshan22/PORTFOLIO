@@ -90,9 +90,7 @@ function renderAboutTyping(progress) {
     }
 
     // Small intro pause, then map scroll progress directly to character count.
-    // Typing finishes at 85% of the runway; the last 15% keeps the section
-    // pinned on the completed text before the page scrolls on.
-    const typingProgress = smoothStep(0.05, 0.85, progress);
+    const typingProgress = smoothStep(0.035, 0.90, progress);
     const characterCount = Math.floor(ABOUT_TEXT.length * typingProgress);
 
     if (characterCount !== lastCharacterCount) {
@@ -119,9 +117,12 @@ function renderAboutTyping(progress) {
 }
 
 function animationLoop() {
-    // Tie typing 1:1 to scroll position (no lag). This guarantees the text
-    // is fully typed by the time the section can unpin — even on a fast flick.
-    currentAboutProgress = targetAboutProgress;
+    currentAboutProgress +=
+        (targetAboutProgress - currentAboutProgress) * 0.12;
+
+    if (Math.abs(targetAboutProgress - currentAboutProgress) < 0.0001) {
+        currentAboutProgress = targetAboutProgress;
+    }
 
     renderAboutTyping(currentAboutProgress);
     requestAnimationFrame(animationLoop);
