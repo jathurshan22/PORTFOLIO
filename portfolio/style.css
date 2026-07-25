@@ -4840,6 +4840,13 @@ a.contact-detail-card:hover {
 
 @media (max-width: 1024px) {
 
+    /* Mobile/tablet only: clip any horizontal overflow so the page
+       can't be swiped sideways. Safe here because About is NOT sticky
+       below 1024px, so this never affects the desktop scroll-typing. */
+    html {
+        overflow-x: hidden;
+    }
+
     /* ---------------------------------------------------
        1. SCROLL INDICATOR — laptop / desktop only
     --------------------------------------------------- */
@@ -4921,6 +4928,11 @@ a.contact-detail-card:hover {
     /* ---------------------------------------------------
        4. ABOUT — no scroll typing, content already loaded
     --------------------------------------------------- */
+
+    .about-section {
+        height: auto;
+        padding: 90px 0 80px;
+    }
 
     .about-section {
         height: auto;
