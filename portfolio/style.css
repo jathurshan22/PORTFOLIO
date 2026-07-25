@@ -28,6 +28,9 @@
 
 html {
     scroll-behavior: smooth;
+
+    /* Stop horizontal swipe on mobile (body-only overflow-x isn't
+       enough on iOS). clip doesn't break .about-sticky like hidden would. */
     overflow-x: clip;
 }
 
@@ -5079,67 +5082,129 @@ a.contact-detail-card:hover {
     }
 
 
-    /* The 3 dots */
+    /* Signature diamond menu button */
 
     .menu-button {
+        position: relative;
+
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
-        gap: 4px;
+        gap: 4.5px;
 
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
 
-        border:
-            1px solid
-            rgba(255, 255, 255, 0.12);
-
+        border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 50%;
 
         background:
-            rgba(10, 10, 10, 0.55);
+            radial-gradient(
+                circle at 50% 22%,
+                rgba(212, 175, 55, 0.14),
+                transparent 62%
+            ),
+            rgba(9, 9, 10, 0.62);
 
-        backdrop-filter:
-            blur(18px)
-            saturate(150%);
-
-        -webkit-backdrop-filter:
-            blur(18px)
-            saturate(150%);
+        backdrop-filter: blur(18px) saturate(150%);
+        -webkit-backdrop-filter: blur(18px) saturate(150%);
 
         box-shadow:
-            0 10px 30px
-            rgba(0, 0, 0, 0.4);
-    }
-
-    .menu-button span {
-        width: 4px;
-        height: 4px;
-
-        margin: 0;
-
-        border-radius: 50%;
-
-        background: rgba(255, 255, 255, 0.9);
+            0 10px 30px rgba(0, 0, 0, 0.45),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
 
         transition:
-            background 0.3s ease,
-            transform 0.3s ease;
+            transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.4s ease;
     }
 
+    /* Gold gradient ring (masked pseudo-border) */
+    .menu-button::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        padding: 1px;
+
+        background:
+            linear-gradient(
+                150deg,
+                var(--gold-light),
+                var(--gold) 42%,
+                rgba(212, 175, 55, 0.12) 72%
+            );
+
+        -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
+
+        opacity: 0.55;
+        pointer-events: none;
+
+        transition: opacity 0.4s ease;
+    }
+
+    /* Each span → a rotated gold diamond (◇ ◆ ◇) */
+    .menu-button span {
+        width: 5px;
+        height: 5px;
+
+        margin: 0;
+        border-radius: 1.5px;
+
+        background:
+            linear-gradient(145deg, var(--gold-light), var(--gold));
+
+        transform: rotate(45deg);
+
+        box-shadow: 0 0 6px rgba(212, 175, 55, 0.35);
+
+        transition:
+            transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    /* Center diamond is the signature — slightly larger */
+    .menu-button span:nth-child(2) {
+        width: 7px;
+        height: 7px;
+        box-shadow: 0 0 9px rgba(239, 211, 111, 0.5);
+    }
+
+    .menu-button:active {
+        transform: scale(0.94);
+    }
+
+    /* OPEN STATE — ring glows, center diamond blooms, sides tuck away */
     .menu-button.is-open {
-        border-color:
-            rgba(212, 175, 55, 0.42);
+        box-shadow:
+            0 10px 34px rgba(0, 0, 0, 0.5),
+            0 0 22px rgba(212, 175, 55, 0.28),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
-    .menu-button.is-open span {
-        background: var(--gold-light);
+    .menu-button.is-open::before {
+        opacity: 1;
     }
 
     .menu-button.is-open span:nth-child(2) {
-        transform: scale(1.4);
+        transform: rotate(45deg) scale(1.55);
+        box-shadow: 0 0 14px rgba(239, 211, 111, 0.75);
+    }
+
+    .menu-button.is-open span:nth-child(1) {
+        transform: rotate(45deg) translate(2px, 2px) scale(0.7);
+        opacity: 0.55;
+    }
+
+    .menu-button.is-open span:nth-child(3) {
+        transform: rotate(45deg) translate(-2px, -2px) scale(0.7);
+        opacity: 0.55;
     }
 
 
