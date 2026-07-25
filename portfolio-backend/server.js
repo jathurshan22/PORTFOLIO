@@ -25,7 +25,17 @@ connectDB().then(seedAdmin);
 app.set("trust proxy", 1);
 
 // ---------- Security & parsing ----------
-app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+            "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
+            "script-src": ["'self'"],
+            "connect-src": ["'self'"]
+        }
+    }
+}));
 
 // The backend serves the frontend from the same origin, so cross-origin
 // requests are only needed if CLIENT_ORIGINS is set in .env
