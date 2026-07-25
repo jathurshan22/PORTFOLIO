@@ -2969,6 +2969,12 @@ button {
     .projects-track {
         grid-auto-columns: 88%;
         gap: 14px;
+
+        /* Enable finger swipe on mobile (base rule hides overflow
+           + locks touch to vertical, so only arrows worked before) */
+        overflow-x: auto;
+        touch-action: pan-x pan-y;
+        -webkit-overflow-scrolling: touch;
     }
 
     .project-content {
